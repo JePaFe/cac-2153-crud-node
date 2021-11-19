@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 17-11-2021 a las 00:00:40
+-- Tiempo de generación: 19-11-2021 a las 00:00:41
 -- Versión del servidor: 10.6.4-MariaDB
 -- Versión de PHP: 7.4.19
 
@@ -29,17 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `productos` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `descripcion` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `name`) VALUES
-(1, 'Producto Nro 123'),
-(2, 'Producto Nro 2'),
-(3, 'Producto desde la DB');
+INSERT INTO `productos` (`id`, `name`, `descripcion`) VALUES
+(1, 'Producto Nro 123', NULL),
+(2, 'Producto Nro 2', NULL),
+(3, 'Producto desde la DB', NULL),
+(4, 'Producto Nuevo', NULL),
+(5, 'Producto Nro 21', NULL),
+(6, 'Producto con descripción', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#x27;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
 
 --
 -- Índices para tablas volcadas
@@ -59,7 +63,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

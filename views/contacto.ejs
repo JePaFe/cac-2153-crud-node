@@ -11,13 +11,7 @@
 
     <h1>Contacto</h1>
 
-    <% if (typeof errors != 'undefined') { %> 
-        <ul>
-        <% errors.forEach((error) => { %>
-            <li><strong><%= error.param %></strong>: <%= error.msg %></li>
-        <% }) %>
-        </ul>
-    <% } %>
+    <%- include('partials/errors.ejs')
 
     <form action="/contacto" method="post">
         <div>
