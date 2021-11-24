@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator')
 
-const connection = require('./db')
+const connection = require('../db')
 
 const index = (req, res) => {
     connection.query('SELECT * FROM productos', (error, results) => {
@@ -50,9 +50,51 @@ const store = (req, res) => {
     }
 }
 
+const edit = (req, res) => {
+    connection.query('SELECT * FROM productos WHERE id = ?', [ req.params.nro ], (error, results) => {
+        if (error) {
+            throw error
+        }
+
+        if (results.length > 0) {
+            res.render('productos/edit', { values: {}, producto: results[0] })
+        } else {
+            res.send('No se encontro el producto')
+        }
+    })
+}
+
+const update = (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        res.render('productos/edit', { values: req.body, producto: {}, errors: errors.array() })
+    } else {
+        connection.query('UPDATE productos SET ? WHERE id = ?', [ { name: req.body.name, descripcion: req.body.descripcion }, req.body.id ], (error) => {
+            if (error) {
+                throw error
+            }
+
+            res.redirect('/productos')
+        })
+    }
+}
+
+const destroy = (req, res) => {
+    connection.query('DELETE FROM productos WHERE id = ?', [ req.params.nro ], (error) => {
+        if (error) {
+            throw error
+        }
+
+        res.redirect('/productos')
+    })
+}
+
 module.exports = {
     index,
     show,
     create,
-    store
+    store,
+    edit,
+    update,
+    destroy
 }

@@ -15,6 +15,25 @@
 
     <% productos.forEach(producto => { %>
         <h2><a href="/productos/<%= producto.id %>"><%= producto.name %></a></h2>
+        <a href="/productos/<%= producto.id %>/edit">Editar</a>
+
+        <form class="form-delete" action="/productos/<%= producto.id %>/delete?_method=DELETE" method="post">
+            <button type="submit">Borrar</button>
+        </form>
     <% }) %>
+
+    <script>
+        const forms = document.querySelectorAll('.form-delete')
+
+        forms.forEach(form => {
+            form.addEventListener('submit', (event) => {
+                event.preventDefault()
+
+                if (confirm('¿Esta seguro?')) {
+                    event.target.submit()
+                }
+            })
+        })
+    </script>
 </body>
 </html>
