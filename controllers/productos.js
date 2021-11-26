@@ -3,6 +3,8 @@ const { validationResult } = require('express-validator')
 const connection = require('../db')
 
 const index = (req, res) => {
+    // req.session.user_id = 1
+    // console.log(req.session)
     connection.query('SELECT * FROM productos', (error, results) => {
         if (error) {
             throw error
@@ -13,6 +15,7 @@ const index = (req, res) => {
 }
 
 const show = (req, res) => {
+    // console.log(req.session.user_id)
     connection.query('SELECT * FROM productos WHERE id = ?', [ req.params.nro ], (error, results) => {
         if (error) {
             throw error
